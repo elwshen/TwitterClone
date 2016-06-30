@@ -9,4 +9,18 @@
     android:onClick="onProfileView"
     android:title="Profile"
     ></item>
+    <item
+        android:id="@+id/miCompose"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_compose"
+        android:onClick="onCompose"
+        android:title="Compose Tweet"
+        ></item>
+    <item android:id="@+id/action_search"
+        android:orderInCategory="5"
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
 </menu>

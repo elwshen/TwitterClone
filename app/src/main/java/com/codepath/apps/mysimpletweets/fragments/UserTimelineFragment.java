@@ -69,16 +69,4 @@ public class UserTimelineFragment extends TweetsListFragment{
         });
     }
 
-//    private void populateProfileHeader(User user) {
-//        TextView tvName = (TextView) findViewById(R.id.tvFullName);
-//        TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
-//        TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
-//        TextView tvFollowing = (TextView) findViewById(R.id.tvFollowing);
-//        ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
-//        tvName.setText(user.getName());
-//        tvTagline.setText(user.getTagline());
-//        tvFollowers.setText(user.getFollowersCount() + " Followers");
-//        tvFollowing.setText(user.getFriendsCount() + " Following");
-//        Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
-//    }
 }

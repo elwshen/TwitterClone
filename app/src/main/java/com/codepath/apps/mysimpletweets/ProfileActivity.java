@@ -25,21 +25,14 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         client = TwitterApplication.getRestClient();
-        //get account info
-        client.getUserInfo(new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                user = User.fromJSON(response);
-                getSupportActionBar().setTitle("@" + user.getScreenName());
-                populateProfileHeader(user);
-            }
-        });
+
+        String screenName = getIntent().getStringExtra("screen_name");
+        loadUserInfo(screenName);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        //get screen name
-        String screenName = getIntent().getStringExtra("screen_name");
 
         if (savedInstanceState == null) {
 
@@ -51,6 +44,39 @@ public class ProfileActivity extends AppCompatActivity {
             ft.commit();
         }
 
+    }
+
+    // Loads either the current user OR a specified user's data
+    public void loadUserInfo(String screenName) {
+        if (screenName != null && !screenName.isEmpty()) {
+            // Trigger call to "users/show" endpoint
+            // to load user profile data
+            // populate the top of the profile view
+            client.getUserInfo(screenName, new JsonHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    user = User.fromJSON(response);
+                    getSupportActionBar().setTitle("@" + user.getScreenName());
+                    populateProfileHeader(user);
+                }
+
+            });
+        } else { // no screenName was passed
+            // Trigger call to "account/verifyCredentials" endpoint
+            // to load current user profile data
+            // populate the top of the profile view
+            client.getUserInfo(new JsonHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    user = User.fromJSON(response);
+                    getSupportActionBar().setTitle("@" + user.getScreenName());
+                    populateProfileHeader(user);
+                }
+
+            });
+        }
     }
 
     private void populateProfileHeader(User user) {

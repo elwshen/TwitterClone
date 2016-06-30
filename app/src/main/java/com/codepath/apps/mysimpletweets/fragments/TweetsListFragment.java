@@ -3,6 +3,7 @@ package com.codepath.apps.mysimpletweets.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class TweetsListFragment extends Fragment {
     private ArrayList<Tweet> tweets;
     private TweetsArrayAdapter aTweets;
     private ListView lvTweets;
+    private SwipeRefreshLayout swipeContainer;
 
     //inflation logic
     //creation lifecycle
@@ -33,6 +35,15 @@ public class TweetsListFragment extends Fragment {
         lvTweets = (ListView) v.findViewById(R.id.lvTweets);
         //connect adapter to listview
         lvTweets.setAdapter(aTweets);
+
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchTimelineAsync(0, swipeContainer, aTweets);
+            }
+        });
+
         return v;
     }
 
@@ -48,4 +59,14 @@ public class TweetsListFragment extends Fragment {
     public void addAll (List<Tweet> tweets) {
         aTweets.addAll(tweets);
     }
+
+    public void appendTweet(Tweet tweet) {
+        tweets.add(0, tweet);
+        aTweets.notifyDataSetChanged();
+    }
+
+    public void fetchTimelineAsync(int page, SwipeRefreshLayout swipeContainer, TweetsArrayAdapter aTweets) {
+
+    }
+
 }
