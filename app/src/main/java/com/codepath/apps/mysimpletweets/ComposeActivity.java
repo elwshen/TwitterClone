@@ -32,6 +32,8 @@ public class ComposeActivity extends AppCompatActivity {
         etTweet = (EditText) findViewById(R.id.etTweet);
         btnTweet = (Button) findViewById(R.id.btnTweet);
 
+        getSupportActionBar().setTitle("Compose a Tweet");
+
         populateComposeWindow(replyTo);
     }
 

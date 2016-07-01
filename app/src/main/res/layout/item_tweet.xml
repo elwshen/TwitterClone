@@ -61,10 +61,27 @@
         android:src="@drawable/ic_reply"
         android:background="@null"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_below="@+id/tvElapsed"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/tvBody"
-        android:layout_alignLeft="@+id/tvElapsed"
-        android:layout_alignStart="@+id/tvElapsed" />
+        android:layout_below="@+id/tvBody"
+        android:layout_alignLeft="@+id/tvBody"
+        android:layout_alignStart="@+id/tvBody" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRetweet"
+        android:src="@drawable/ic_retweet"
+        android:background="@null"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_alignTop="@+id/btnReply"
+        android:layout_toRightOf="@+id/btnReply"
+        android:layout_toEndOf="@+id/btnReply" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnFav"
+        android:src="@drawable/ic_favorite"
+        android:background="@null"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_alignTop="@+id/btnRetweet"
+        android:layout_toRightOf="@+id/btnRetweet"
+        android:layout_toEndOf="@+id/btnRetweet" />
 </RelativeLayout>

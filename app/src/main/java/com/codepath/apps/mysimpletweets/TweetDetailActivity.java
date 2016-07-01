@@ -38,6 +38,7 @@ public class TweetDetailActivity extends AppCompatActivity {
 
         tweet = (Tweet) getIntent().getSerializableExtra("tweet");
         user = tweet.getUser();
+        getSupportActionBar().setTitle("@" + user.getScreenName() + "'s Tweet");
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
         tvName = (TextView) findViewById(R.id.tvName);
