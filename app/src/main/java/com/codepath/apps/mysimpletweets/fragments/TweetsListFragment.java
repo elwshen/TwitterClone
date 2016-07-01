@@ -48,6 +48,12 @@ public class TweetsListFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        fetchTimelineAsync(0, swipeContainer, aTweets);
+        super.onResume();
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //create arraylist
@@ -62,6 +68,11 @@ public class TweetsListFragment extends Fragment {
 
     public void appendTweet(Tweet tweet) {
         tweets.add(0, tweet);
+        aTweets.notifyDataSetChanged();
+    }
+
+    public void refresh(int pos, Tweet tweet) {
+        tweets.set(pos, tweet);
         aTweets.notifyDataSetChanged();
     }
 

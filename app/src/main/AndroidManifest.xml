@@ -55,7 +55,11 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ComposeActivity"></activity>
+        <activity
+            android:name=".ComposeActivity"
+            android:windowSoftInputMode="stateVisible" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".TweetDetailActivity"></activity>
     </application>
 
 </manifest>

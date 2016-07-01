@@ -29,6 +29,7 @@
         android:layout_below="@+id/tvUsername"
         android:layout_toRightOf="@+id/ivProfileImage"
 
+        android:paddingRight="10dp"
         android:padding="5dp" />
 
     <TextView
@@ -51,4 +52,19 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:padding="5dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="reply"
+        android:id="@+id/btnReply"
+        android:src="@drawable/ic_reply"
+        android:background="@null"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_below="@+id/tvElapsed"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/tvBody"
+        android:layout_alignLeft="@+id/tvElapsed"
+        android:layout_alignStart="@+id/tvElapsed" />
 </RelativeLayout>

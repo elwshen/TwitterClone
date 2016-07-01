@@ -2,11 +2,13 @@ package com.codepath.apps.mysimpletweets.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codepath.apps.mysimpletweets.TweetsArrayAdapter;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.TwitterClient;
 import com.codepath.apps.mysimpletweets.models.Tweet;
@@ -67,6 +69,31 @@ public class UserTimelineFragment extends TweetsListFragment{
             }
 
         });
+    }
+
+    public void fetchTimelineAsync(int page, final SwipeRefreshLayout swipeContainer, final TweetsArrayAdapter aTweets) {
+        // Send the network request to fetch the updated data
+        // `client` here is an instance of Android Async HTTP
+        TwitterClient client = new TwitterClient(getContext());
+        String screenName = getArguments().getString("screen_name");
+        client.getUserTimeline(screenName, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                // Remember to CLEAR OUT old items before appending in the new ones
+                aTweets.clear();
+                // ...the data has come back, add new items to your adapter...
+                aTweets.addAll(Tweet.fromJSONArray(response));
+                // Now we call setRefreshing(false) to signal refresh has finished
+                swipeContainer.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d("DEBUG", "Fetch timeline error: " + responseString);
+            }
+
+        });
+
     }
 
 }

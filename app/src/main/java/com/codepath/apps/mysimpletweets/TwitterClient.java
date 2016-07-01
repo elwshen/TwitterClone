@@ -79,14 +79,42 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().post(apiUrl, params, handler);
     }
 
-    public void getSearchQuery(String query, AsyncHttpResponseHandler handler) {
-        String apiUrl = getApiUrl("search/tweets.json?q=query");
+    public void getSearch(String query, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("search/tweets.json");
         RequestParams params = new RequestParams();
         params.put("q", query);
         getClient().get(apiUrl, params, handler);
     }
 
+    public void postRetweet(long postId, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/retweet.json");
+        RequestParams params = new RequestParams();
+        params.put("id", postId);
+        getClient().post(apiUrl, params, handler);
+    }
 
+//  public void unRetweet(long postId, AsyncHttpResponseHandler handler) {
+//        String apiUrl = getApiUrl("statuses/unretweet.json");
+//        RequestParams params = new RequestParams();
+//        params.put("id", postId);
+//        getClient().post(apiUrl, params, handler);
+//    }
+
+    public void postFavorite(long postId, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("favorites/create.json");
+        RequestParams params = new RequestParams();
+        params.put("id", postId);
+        getClient().post(apiUrl, params, handler);
+    }
+    public void unFavorite(long postId, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("favorites/destroy.json");
+        RequestParams params = new RequestParams();
+        params.put("id", postId);
+        getClient().post(apiUrl, params, handler);
+    }
+
+
+//#33B5E5
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
 	 * 	  i.e getApiUrl("statuses/home_timeline.json");

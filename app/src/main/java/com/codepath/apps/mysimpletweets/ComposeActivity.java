@@ -25,12 +25,23 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
+        String replyTo = getIntent().getStringExtra("reply_to");
+
         client = TwitterApplication.getRestClient();
 
         etTweet = (EditText) findViewById(R.id.etTweet);
         btnTweet = (Button) findViewById(R.id.btnTweet);
+
+        populateComposeWindow(replyTo);
     }
 
+    public void populateComposeWindow(String replyTo) {
+        if (replyTo != null && !replyTo.isEmpty()) {
+            String newText = etTweet.getText().toString() + replyTo;
+            etTweet.setText("");
+            etTweet.append(newText);
+        }
+    }
     public void postTweet(View view) {
         String tweetText = etTweet.getText().toString();
         client.postTweet(tweetText, new JsonHttpResponseHandler(){

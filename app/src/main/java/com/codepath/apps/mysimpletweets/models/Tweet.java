@@ -16,6 +16,12 @@ public class Tweet implements Serializable{
     private User user;
     private String createdAt;
     private long uid; //unique id
+    private boolean retweeted;
+    private boolean favorited;
+
+    public boolean isRetweeted() {
+        return retweeted;
+    }
 
     public String getBody() {
         return body;
@@ -48,6 +54,8 @@ public class Tweet implements Serializable{
             tweet.uid = jsonObject.getLong("id");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+            tweet.retweeted = jsonObject.getBoolean("retweeted");
+            tweet.favorited = jsonObject.getBoolean("favorited");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -72,4 +80,15 @@ public class Tweet implements Serializable{
         return tweets;
     }
 
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean b) {
+        favorited = b;
+    }
+
+    public void setRetweeted(boolean b) {
+        retweeted = b;
+    }
 }
